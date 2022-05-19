@@ -48,7 +48,7 @@ def gc_content_subseq(gene, k=20):
         res.append(gc_content(subseq))
     return res
 
-print(gc_content_subseq(gene, k=4))
+print( gc_content_subseq(gene, k=4))
 
 
 
@@ -99,6 +99,7 @@ Result_dict = {key : gc_content(value) for key,value in Fasta_dict.items()}
 print(Result_dict)
 
 # looking for max GC values in values() in dict
+# get allows you to specify a default value if the key does not exist.
 
 max_GC = max(Result_dict, key = Result_dict.get)
 

@@ -1,4 +1,5 @@
 from collections import Counter
+
 DNA_Codons = {
     # 'M' - START, '_' - STOP
     "GCT": "A", "GCC": "A", "GCA": "A", "GCG": "A",
@@ -26,6 +27,7 @@ DNA_Codons = {
 
 seq = "TAATATTGGTACTAC"
 
+
 def translate_seq(seq, init_pos=0):
     return [DNA_Codons[seq[pos: pos + 3]] for pos in range(init_pos, len(seq)-2, 3)]
 
@@ -51,3 +53,24 @@ def codon_freq(seq, amino_acid):
 
 
 print(f'amino acids freq:{(codon_freq(seq, "Y"))}')
+
+
+# generating open reading frames
+seq = "TAATATTGGTACTAC"
+from dna_to_rna import *
+
+def gen_reading_frame(seq):
+    ''' generate 6 reading frames of dna including complementary strings'''
+    frame = []
+    frame.append(translate_seq(seq, 0))
+    frame.append(translate_seq(seq, 1))
+    frame.append(translate_seq(seq, 2))
+    frame.append(translate_seq(reverse_complemment(seq), 0))
+    frame.append(translate_seq(reverse_complemment(seq), 1))
+    frame.append(translate_seq(reverse_complemment(seq), 2))
+    return frame
+
+
+print(f'orf :')
+for frame in gen_reading_frame(seq):
+    print(frame)
